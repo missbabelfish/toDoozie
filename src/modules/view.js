@@ -16,7 +16,7 @@ function renderProjects() {
 
     // for each project
     projectList.forEach((project, index) => {
-        console.log(project.name)
+        console.log(project)
     
         // create project div
         const projectCard = document.createElement('div')
@@ -42,8 +42,12 @@ function renderProjects() {
         const projectDeleteBtn = document.createElement('button')
         projectDeleteBtn.id = 'project-delete-btn'
         projectDeleteBtn.textContent = 'Delete Project'
-    
-        // append elements to project div
+        projectDeleteBtn.addEventListener('click', () => {
+            projects.deleteProject(project)
+            renderProjects()
+        })
+            // append elements to project div
+            
         projectCard.appendChild(projectName)
         projectCard.appendChild(projectStatus);
         projectButtons.appendChild(projectEditBtn);
@@ -71,7 +75,7 @@ function renderProjects() {
 function renderNibbles() {
 
     // clear main container
-    projectsContainer.innerHTML = ''
+    nibblesContainer.innerHTML = ''
 
     const nibbleHeader = document.createElement('h2')
     nibbleHeader.classList.add('headers')

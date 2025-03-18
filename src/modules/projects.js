@@ -33,8 +33,8 @@ class ProjectList {
     // delete project
     deleteProject(project) {
         const index = this.projects.indexOf(project);
-		if (index) {
-			this.projects.splice(index);
+		if (index > -1) {
+			this.projects.splice(index, 1);
 		}
     }
     // get projects
