@@ -1,5 +1,6 @@
 import projects, { Project } from "./projects";
 import { createEditProjectModal } from "./modals";
+import { getProjectsFromStorage, saveProjects } from "./database";
 
 // create variables for containers
 const projectsContainer = document.getElementById('projects-container');
@@ -14,6 +15,7 @@ function renderProjects() {
 
     // get projects from project list
     const projectList = projects.getProjects()
+    console.log({projectList})
 
     // for each project
     projectList.forEach((project, index) => {
@@ -47,7 +49,8 @@ function renderProjects() {
         projectDeleteBtn.id = 'project-delete-btn'
         projectDeleteBtn.textContent = 'Delete Project'
         projectDeleteBtn.addEventListener('click', () => {
-            projects.deleteProject(project)
+            projects.deleteProject(project) 
+            saveProjects()
             renderProjects()
         })
             // append elements to project div

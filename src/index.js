@@ -1,6 +1,7 @@
 import './styles.css';
 import { createAddProjectModal } from './modules/modals'
 import { renderProjects, renderNibbles } from './modules/view';
+import { getProjectsFromStorage } from './modules/database';
 
 const newProjectButton = document.getElementById('new-proj-btn')
 const addProjectModal = document.getElementById('add-project-modal')
@@ -11,6 +12,7 @@ newProjectButton.addEventListener('click', () => {
     createAddProjectModal()
 })
 
+getProjectsFromStorage();
 renderProjects()
 
 

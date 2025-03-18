@@ -1,5 +1,6 @@
 import projects, { Project } from './projects'
 import { renderProjects, renderNibbles } from './view'
+import { saveProjects } from './database'
 
 function createAddProjectModal() {
 
@@ -44,7 +45,7 @@ function createAddProjectModal() {
         addProjectModal.close()
 
         // add projectList to storage
-
+        saveProjects()
     })
 }
 
@@ -87,6 +88,7 @@ function createEditProjectModal(project) {
 		const newName = formData.get('project-name');
 		project.editProject(newName);
 		console.log(projects.getProjects());
+        saveProjects()
 		renderProjects();
 		// set projects to render in reverse
 		// render nibbles
