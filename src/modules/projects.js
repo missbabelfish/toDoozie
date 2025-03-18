@@ -14,6 +14,9 @@ class Project {
         const newNibble = new Nibble(name, notes, dueDate, priority)
         this.nibbles.push(newNibble)
     }
+    getProject() {
+        return this.name
+    }
 }
 
 // project list, methods
@@ -40,4 +43,5 @@ class ProjectList {
     }
 }
 
-export { Project, ProjectList }
+export { Project }
+export default new ProjectList

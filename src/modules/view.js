@@ -1,20 +1,23 @@
-import { ProjectList } from "./projects";
+import projects, { Project } from "./projects";
 
 // create variables for containers
+const projectsContainer = document.querySelector('projects-container');
+const nibblesContainer = document.querySelector('nibbles-container')
 
 // render projects
+function renderProjects() {
+    console.log('renderProjects fired')
 
-    // clear sidebar container
-
-    // append sidebar container to left side ??
-
-    // create add project button
-
-    // append button
+    // clear projects container
+    // projectsContainer.innerHTML = '';
 
     // get projects from project list
+    const projectList = projects.getProjects()
 
     // for each project
+    projectList.forEach((project, index) => {
+        console.log(project.name)
+    }) 
 
     // create project div
 
@@ -31,7 +34,7 @@ import { ProjectList } from "./projects";
     // append elements to project div
 
     // event listener to check which project has focus and render its nibbles
-
+}
 
 
 // delete project handler
@@ -45,9 +48,15 @@ import { ProjectList } from "./projects";
     // store updated list
 
 
-// display nibbles
+function renderNibbles() {
 
     // clear main container
+    projectsContainer.innerHTML = ''
+
+    const nibbleHeader = document.createElement('h2')
+    nibbleHeader.classList.add('headers')
+    const projectName = Project.getProject(project)
+    nibbleHeader.textContent = `${projectName}`
 
     // for each nibble
 
@@ -62,6 +71,7 @@ import { ProjectList } from "./projects";
     // append elements
 
     // add event listener to change active class on nibble
+}
 
 // edit nibble handler
 
@@ -75,4 +85,4 @@ import { ProjectList } from "./projects";
     // delete nibble
 
 
-// export renderNibbles, renderTasks
+export { renderProjects, renderNibbles }

@@ -1,4 +1,5 @@
-import { Project, ProjectList } from './projects'
+import projects, { Project } from './projects'
+import { renderProjects, renderNibbles } from './view'
 
 function createAddProjectModal() {
     const addProjectModal = document.createElement('dialog')
@@ -28,13 +29,12 @@ function createAddProjectModal() {
     addProjectModal.showModal()
 
     addProjectForm.addEventListener('submit', (e) => {
-        console.log('submit clicked')
         e.preventDefault()
         const formData = new FormData(e.target)
         const projectName = formData.get('new-project-name')
-        console.log({projectName})
-        // ProjectList.addProject(projectName, 'incomplete')
-        // render project list
+        projects.addProject(projectName, 'incomplete')
+        console.log(projects.getProjects())
+        renderProjects()
         // set projects to render in reverse
         // render nibbles
         addProjectModal.close()
