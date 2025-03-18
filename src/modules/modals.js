@@ -2,6 +2,7 @@ import projects, { Project } from './projects'
 import { renderProjects, renderNibbles } from './view'
 
 function createAddProjectModal() {
+
     const addProjectModal = document.createElement('dialog')
     const addProjectForm = document.createElement('form')
     const newProjectLabel = document.createElement('label')
@@ -9,7 +10,6 @@ function createAddProjectModal() {
     newProjectLabel.textContent = 'Project Name:'
     const newProjectInput = document.createElement('input')
     newProjectInput.setAttribute('id', 'new-project-name')
-    newProjectInput.setAttribute('required', 'true')
     newProjectInput.type = 'text'
     newProjectInput.name = 'new-project-name'
     // max length?? 
@@ -19,6 +19,10 @@ function createAddProjectModal() {
     submitNewProjectBtn.textContent = 'Submit'
     const cancelNewProjectBtn = document.createElement('button')
     cancelNewProjectBtn.textContent = 'Cancel'
+    cancelNewProjectBtn.type = 'button'
+    cancelNewProjectBtn.addEventListener('click', () => {
+        addProjectModal.close()
+    })
 
     document.body.appendChild(addProjectModal)
     addProjectForm.appendChild(newProjectLabel)
@@ -63,7 +67,11 @@ function createEditProjectModal(project) {
 	submitEditProjectBtn.value = 'edit project';
 	submitEditProjectBtn.textContent = 'Submit';
 	const cancelEditProjectBtn = document.createElement('button');
+    cancelEditProjectBtn.type = 'button'
 	cancelEditProjectBtn.textContent = 'Cancel';
+    cancelEditProjectBtn.addEventListener('click', () => {
+        editProjectModal.close()
+    })
 
 	document.body.appendChild(editProjectModal);
 	editProjectForm.appendChild(projectLabel);
