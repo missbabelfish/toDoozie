@@ -1,4 +1,5 @@
 import projects, { Project } from "./projects";
+import { createEditProjectModal } from "./modals";
 
 // create variables for containers
 const projectsContainer = document.getElementById('projects-container');
@@ -37,6 +38,9 @@ function renderProjects() {
         const projectEditBtn = document.createElement('button')
         projectEditBtn.id = 'project-edit-btn'
         projectEditBtn.textContent = 'Edit Project'
+        projectEditBtn.addEventListener('click', () => {
+            createEditProjectModal(project)
+        })
         
         // delete button
         const projectDeleteBtn = document.createElement('button')
