@@ -23,9 +23,18 @@ h1 {
 .sidebar {
   border: 2px solid chartreuse;
   min-width: 40ch;
+  display: flex;
+  flex-direction: column;
 }
 
 .main {
   border: 3px solid red;
   width: 100%;
+}
+
+dialog {
+  margin: auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
