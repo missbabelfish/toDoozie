@@ -1,15 +1,15 @@
 import projects, { Project } from "./projects";
 
 // create variables for containers
-const projectsContainer = document.querySelector('projects-container');
-const nibblesContainer = document.querySelector('nibbles-container')
+const projectsContainer = document.getElementById('projects-container');
+const nibblesContainer = document.getElementById('nibbles-container')
 
 // render projects
 function renderProjects() {
     console.log('renderProjects fired')
 
     // clear projects container
-    // projectsContainer.innerHTML = '';
+    projectsContainer.innerHTML = '';
 
     // get projects from project list
     const projectList = projects.getProjects()
@@ -17,21 +17,41 @@ function renderProjects() {
     // for each project
     projectList.forEach((project, index) => {
         console.log(project.name)
+    
+        // create project div
+        const projectCard = document.createElement('div')
+        projectCard.classList.add('project-card')
+    
+        // project name
+        const projectName = document.createElement('h3')
+        projectName.textContent = project.name
+    
+        // project status
+        const projectStatus = document.createElement('span')
+        projectStatus.textContent = project.status
+    
+        // button div
+        const projectButtons = document.createElement('div')
+    
+        // edit button
+        const projectEditBtn = document.createElement('button')
+        projectEditBtn.id = 'project-edit-btn'
+        projectEditBtn.textContent = 'Edit Project'
+        
+        // delete button
+        const projectDeleteBtn = document.createElement('button')
+        projectDeleteBtn.id = 'project-delete-btn'
+        projectDeleteBtn.textContent = 'Delete Project'
+    
+        // append elements to project div
+        projectCard.appendChild(projectName)
+        projectCard.appendChild(projectStatus);
+        projectButtons.appendChild(projectEditBtn);
+        projectButtons.appendChild(projectDeleteBtn);
+        projectCard.appendChild(projectButtons);
+        
+        projectsContainer.append(projectCard)
     }) 
-
-    // create project div
-
-    // project name
-
-    // project status
-
-    // button div
-
-    // edit button
-
-    // delete button
-
-    // append elements to project div
 
     // event listener to check which project has focus and render its nibbles
 }
