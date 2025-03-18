@@ -3,32 +3,37 @@ import { Project, ProjectList } from './projects'
 function createAddProjectModal() {
     const addProjectModal = document.createElement('dialog')
     const addProjectForm = document.createElement('form')
-    const newProjectTitle = document.createElement('label')
-    newProjectTitle.htmlFor('new-project-name')
-    newProjectTitle.textContent = 'Project Name:'
+    const newProjectLabel = document.createElement('label')
+    newProjectLabel.htmlFor ='new-project-name'
+    newProjectLabel.textContent = 'Project Name:'
     const newProjectInput = document.createElement('input')
-    newProjectInput.id = 'new-project-name'
+    newProjectInput.setAttribute('id', 'new-project-name')
+    newProjectInput.setAttribute('required', 'true')
     newProjectInput.type = 'text'
     newProjectInput.name = 'new-project-name'
-    const submitNewProjectBtn = document.createElement('button')
-    submitNewProjectBtn.setAttribute('type', 'submit')
+    // max length?? 
+    const submitNewProjectBtn = document.createElement('input')
+    submitNewProjectBtn.type = 'submit'
+    submitNewProjectBtn.value = 'add project'
     submitNewProjectBtn.textContent = 'Submit'
     const cancelNewProjectBtn = document.createElement('button')
     cancelNewProjectBtn.textContent = 'Cancel'
 
     document.body.appendChild(addProjectModal)
-    addProjectForm.appendChild(newProjectTitle)
+    addProjectForm.appendChild(newProjectLabel)
     addProjectForm.appendChild(newProjectInput);
     addProjectForm.appendChild(submitNewProjectBtn);
     addProjectForm.appendChild(cancelNewProjectBtn);
     addProjectModal.appendChild(addProjectForm)
     addProjectModal.showModal()
 
-    submitNewProjectBtn.addEventListener('submit', (e) => {
+    addProjectForm.addEventListener('submit', (e) => {
+        console.log('submit clicked')
         e.preventDefault()
         const formData = new FormData(e.target)
         const projectName = formData.get('new-project-name')
-        ProjectList.addProject(projectName, 'incomplete')
+        console.log({projectName})
+        // ProjectList.addProject(projectName, 'incomplete')
         // render project list
         // set projects to render in reverse
         // render nibbles
