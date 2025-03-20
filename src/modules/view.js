@@ -89,19 +89,19 @@ function projectDeleteHandler(project) {
     
 }
 
-function renderNibbles() {
-	const seedProject = projects.getProjects()[0];
-    console.log(seedProject)
+function renderNibbles(project) {
+    console.log(project)
+	console.log(`rendering nibbles for ${project.name}`)
 	// clear main container
 	nibblesContainer.innerHTML = '';
 
 	// get all nibbles
-	const nibbles = seedProject.nibbles;
+	const nibbles = project.nibbles;
     console.log(nibbles)
 
 	const nibbleHeader = document.createElement('h2');
 	nibbleHeader.classList.add('headers');
-	nibbleHeader.textContent = `${seedProject.name}`;
+	nibbleHeader.textContent = `${project.name}`;
 	nibblesContainer.appendChild(nibbleHeader);
 
 	// for each nibble

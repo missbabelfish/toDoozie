@@ -2,6 +2,7 @@ import './styles.css';
 import { createAddProjectModal, createAddNibbleModal } from './modules/modals'
 import { renderProjects, renderNibbles } from './modules/view';
 import { getProjectsFromStorage } from './modules/database';
+import projects from './modules/projects';
 import createChaosBox from './modules/chaosBox';
 
 
@@ -20,6 +21,6 @@ if (JSON.parse(localStorage.getItem('all-projects')) === null) {
 }
 // getProjectsFromStorage();
 renderProjects()
-renderNibbles()
+renderNibbles(projects.getProjects()[0])
 
 

@@ -190,7 +190,7 @@ function createAddNibbleModal(project) {
 		addNibbleModal.close();
 		saveProjects();
 		renderProjects();
-        renderNibbles();
+        renderNibbles(project);
 
 		console.log(projects.getProjects());
 	});
