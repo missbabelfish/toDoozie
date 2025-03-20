@@ -15,13 +15,11 @@ newProjectButton.addEventListener('click', () => {
 	createAddProjectModal();
 });
 
-newNibbleButton.addEventListener('click', () => {
-    console.log('create add nibble')
-	createAddNibbleModal();
-});
-
-createChaosBox()
-getProjectsFromStorage();
+if (JSON.parse(localStorage.getItem('all-projects')) === null) {
+    createChaosBox();
+}
+// getProjectsFromStorage();
 renderProjects()
+renderNibbles()
 
 

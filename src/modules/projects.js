@@ -28,11 +28,12 @@ class ProjectList {
     addProject(name, status) {
         const newProject = new Project(name, status)
         this.projects.push(newProject)
-        return newProject
     }
     // delete project
     deleteProject(project) {
+        console.log('delete project fired')
         const index = this.projects.indexOf(project);
+        console.log(`delete index: ${index}`)
 		if (index > -1) {
 			this.projects.splice(index, 1);
 		}

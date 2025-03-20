@@ -187,12 +187,22 @@ function createAddNibbleModal(project) {
 		console.log({ nibbleName, nibbleNotes, nibbleDate, nibblePriority });
 
 		project.addNibble(nibbleName, nibbleNotes, nibbleDate, nibblePriority);
+		addNibbleModal.close();
 		saveProjects();
 		renderProjects();
-		addNibbleModal.close();
+        renderNibbles();
 
 		console.log(projects.getProjects());
 	});
 }
 
-export { createAddProjectModal, createEditProjectModal, createAddNibbleModal }
+function createEditNibbleModal(nibble) {
+
+}
+
+export { 
+    createAddProjectModal, 
+    createEditProjectModal, 
+    createAddNibbleModal, 
+    createEditNibbleModal
+    }

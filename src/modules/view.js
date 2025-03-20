@@ -1,10 +1,15 @@
 import projects, { Project } from "./projects";
-import { createEditProjectModal, createAddNibbleModal } from "./modals";
+import 
+{ 
+    createEditProjectModal,
+    createAddNibbleModal,
+    createEditNibbleModal
+} from "./modals";
 import { getProjectsFromStorage, saveProjects } from "./database";
 
 // create variables for containers
 const projectsContainer = document.getElementById('projects-container');
-const nibblesContainer = document.getElementById('nibbles-container')
+const nibblesContainer = document.getElementById('nibbles-container');
 
 // render projects
 function renderProjects() {
@@ -85,40 +90,80 @@ function projectDeleteHandler(project) {
 }
 
 function renderNibbles() {
+	const seedProject = projects.getProjects()[0];
+    console.log(seedProject)
+	// clear main container
+	nibblesContainer.innerHTML = '';
 
-    // clear main container
-    nibblesContainer.innerHTML = ''
+	// get all nibbles
+	const nibbles = seedProject.nibbles;
+    console.log(nibbles)
 
-    const nibbleHeader = document.createElement('h2')
-    nibbleHeader.classList.add('headers')
-    const projectName = Project.getProject(project)
-    nibbleHeader.textContent = `${projectName}`
+	const nibbleHeader = document.createElement('h2');
+	nibbleHeader.classList.add('headers');
+	nibbleHeader.textContent = `${seedProject.name}`;
+	nibblesContainer.appendChild(nibbleHeader);
 
-    // for each nibble
+	// for each nibble
+	nibbles.forEach(nibble => {
+		console.log(nibble);
+		// check if nibble active,
 
-    // check if nibble active,
+		// create nibble container div
+		const nibbleCard = document.createElement('div');
+		const nibbleName = document.createElement('h3');
+		nibbleName.textContent = nibble.name;
+		const nibbleNotes = document.createElement('p');
+		nibbleNotes.textContent = nibble.notes;
+		const nibbleDue = document.createElement('p');
+		nibbleDue.textContent = nibble.dueDate;
+		const nibblePriority = document.createElement('p');
+		nibblePriority.textContent = nibble.priority;
+		const nibbleEditBtn = document.createElement('button');
+		nibbleEditBtn.textContent = 'Edit Nibble';
+		// nibbleEditBtn.addEventListener('click', () => {
+		// 	nibbleEditHandler(seedProject, nibble);
+		// });
+		const nibbleDeleteBtn = document.createElement('button');
+		nibbleDeleteBtn.textContent = 'Delete Nibble';
+		// nibbleDeleteBtn.addEventListener('click', () => {
+        //     nibbleDeleteHandler(seedProject, nibble);
+        // })
+        console.log({
+            nibbleName,
+            nibbleNotes,
+            nibbleDue,
+            nibblePriority,
+            nibbleEditBtn,
+            nibbleDeleteBtn
+        })
 
-    // create nibble container div
+        // append elements
+        nibbleCard.appendChild(nibbleName)
+        nibbleCard.appendChild(nibbleNotes)
+        nibbleCard.appendChild(nibbleDue)
+        nibbleCard.appendChild(nibblePriority)
+        nibbleCard.appendChild(nibbleEditBtn)
+        nibbleCard.appendChild(nibbleDeleteBtn)
+        
+		// append to container
+		nibblesContainer.appendChild(nibbleCard);
+	});
 
-    // elements - name, notes, dueDate, priority, edit, delete, checkbox
-
-    // check if all nibbles eaten, update project status
-
-    // append elements
-
-    // add event listener to change active class on nibble
+	// check if all nibbles eaten, update project status
+	// (You can implement this logic here)
 }
 
-// edit nibble handler
-
-    // create edit modal
-
+// function nibbleEditHandler(nibble) {
+//     createEditNibbleModal(nibble)
+// }
 
 // delete nibble handler
-
-    // confirm delete nibble
-
-    // delete nibble
+// function nibbleDeleteHandler(project, nibble) {
+//     if (confirm('Are you sure you want to delete this nibble?')) {
+//         nibble.deleteNibble(project, nibble)
+//     }
+// }
 
 
 export { renderProjects, renderNibbles }

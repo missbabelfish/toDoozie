@@ -7,11 +7,16 @@ class Nibble {
 		this.notes = notes,
 		this.dueDate = dueDate,
 		this.priority = priority;
-	}
+    }
+    // edit nibble
+    editNibble(newName, newNotes, newDueDate, newPriority) {
+
+    }
+    // delete nibble
+    deleteNibble(project, nibble) {
+        
+    }
 }
-// edit nibble
-function editNibble(nibble) {}
-// delete nibble
 
 // export class, methods
 export default Nibble;

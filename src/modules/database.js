@@ -13,7 +13,6 @@ function getProjectsFromStorage() {
         projects.projects.push(project)
         Object.setPrototypeOf(project, Project.prototype);
     })
-    console.log(projects.getProjects())
 }
 
 export { saveProjects, getProjectsFromStorage }
