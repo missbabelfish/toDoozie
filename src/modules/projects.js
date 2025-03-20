@@ -1,4 +1,4 @@
-// import Nibble from './nibbles'
+import Nibble from './nibbles'
 
 // create project
 class Project {

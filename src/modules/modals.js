@@ -36,6 +36,7 @@ function createAddProjectModal() {
     addProjectForm.addEventListener('submit', (e) => {
         e.preventDefault()
         const formData = new FormData(e.target)
+        console.log(formData);
         const projectName = formData.get('new-project-name')
         projects.addProject(projectName, 'incomplete')
         console.log(projects.getProjects())
@@ -65,7 +66,6 @@ function createEditProjectModal(project) {
 	// max length??
 	const submitEditProjectBtn = document.createElement('input');
 	submitEditProjectBtn.type = 'submit';
-	submitEditProjectBtn.value = 'edit project';
 	submitEditProjectBtn.textContent = 'Submit';
 	const cancelEditProjectBtn = document.createElement('button');
     cancelEditProjectBtn.type = 'button'
@@ -97,4 +97,102 @@ function createEditProjectModal(project) {
 
 }
 
-export { createAddProjectModal, createEditProjectModal }
+function createAddNibbleModal(project) {
+	console.log(`creating add nibble for ${project.name}`);
+	const addNibbleModal = document.createElement('dialog');
+	const addNibbleForm = document.createElement('form');
+
+	// Nibble Name
+	const nibbleLabel = document.createElement('label');
+	nibbleLabel.htmlFor = 'nibble-name';
+	nibbleLabel.textContent = 'Nibble Name:';
+	const nibbleInput = document.createElement('input');
+	nibbleInput.setAttribute('id', 'nibble-name');
+	nibbleInput.setAttribute('name', 'nibble-name'); 
+	nibbleInput.setAttribute('required', 'true');
+
+	// Notes
+	const notesLabel = document.createElement('label');
+	notesLabel.htmlFor = 'notes';
+	notesLabel.textContent = 'Notes';
+	const notesInput = document.createElement('textarea'); 
+	notesInput.setAttribute('id', 'notes');
+	notesInput.setAttribute('name', 'notes'); 
+
+	// Due Date
+	const dateLabel = document.createElement('label');
+	dateLabel.htmlFor = 'due-date';
+	dateLabel.textContent = 'Due Date:';
+	const dateInput = document.createElement('input');
+	dateInput.type = 'date';
+	dateInput.setAttribute('id', 'due-date');
+	dateInput.setAttribute('name', 'due-date'); 
+
+	// Priority
+	const priorityLabel = document.createElement('label');
+	priorityLabel.htmlFor = 'priority';
+	priorityLabel.textContent = 'Priority:';
+	const priorityInput = document.createElement('select');
+	priorityInput.setAttribute('id', 'priority');
+	priorityInput.setAttribute('name', 'priority'); 
+
+	// Priority options
+	const priorities = ['Low', 'Medium', 'High'];
+	priorities.forEach(priority => {
+		const option = document.createElement('option');
+		option.textContent = priority;
+		option.value = priority.toLowerCase();
+		priorityInput.appendChild(option);
+	});
+
+	// Buttons
+	const cancelAddNibbleBtn = document.createElement('button');
+	cancelAddNibbleBtn.textContent = 'Cancel';
+	cancelAddNibbleBtn.type = 'button';
+	cancelAddNibbleBtn.addEventListener('click', () => {
+		addNibbleModal.close();
+	});
+
+	const submitAddNibbleBtn = document.createElement('input');
+	submitAddNibbleBtn.type = 'submit';
+	submitAddNibbleBtn.value = 'Submit'; 
+
+	// Append elements to form
+	[
+		nibbleLabel,
+		nibbleInput,
+		notesLabel,
+		notesInput,
+		dateLabel,
+		dateInput,
+		priorityLabel,
+		priorityInput,
+		cancelAddNibbleBtn,
+		submitAddNibbleBtn,
+	].forEach(element => addNibbleForm.appendChild(element));
+
+	addNibbleModal.appendChild(addNibbleForm);
+	document.body.appendChild(addNibbleModal);
+	addNibbleModal.showModal();
+
+	addNibbleForm.addEventListener('submit', e => {
+		e.preventDefault();
+		const formData = new FormData(e.target);
+
+		const nibbleName = formData.get('nibble-name');
+		const nibbleNotes = formData.get('notes');
+		const nibbleDate = formData.get('due-date'); 
+		const nibblePriority = formData.get('priority');
+
+		console.log({ nibbleName, nibbleNotes, nibbleDate, nibblePriority });
+
+		project.addNibble(nibbleName, nibbleNotes, nibbleDate, nibblePriority);
+		saveProjects();
+		renderProjects();
+		addNibbleModal.close();
+
+		console.log(projects.getProjects());
+	});
+}
+
+export { createAddProjectModal, createEditProjectModal, createAddNibbleModal }

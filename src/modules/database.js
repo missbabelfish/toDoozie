@@ -7,18 +7,13 @@ function saveProjects() {
 }
 
 function getProjectsFromStorage() {
+    console.log(`get projects fired`)
     const allProjects = JSON.parse(localStorage.getItem('all-projects')) || [];
-    console.log({allProjects})
     allProjects.forEach(project => {
         projects.projects.push(project)
         Object.setPrototypeOf(project, Project.prototype);
     })
-    // return projects.projects
+    console.log(projects.getProjects())
 }
-
-function deleteProjectFromStorage() {
-
-}
-
 
 export { saveProjects, getProjectsFromStorage }

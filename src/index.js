@@ -1,17 +1,26 @@
 import './styles.css';
-import { createAddProjectModal } from './modules/modals'
+import { createAddProjectModal, createAddNibbleModal } from './modules/modals'
 import { renderProjects, renderNibbles } from './modules/view';
 import { getProjectsFromStorage } from './modules/database';
+import createChaosBox from './modules/chaosBox';
+
 
 const newProjectButton = document.getElementById('new-proj-btn')
+const newNibbleButton = document.getElementById('new-nibble-btn');
 const addProjectModal = document.getElementById('add-project-modal')
 const submitProjectButton = document.getElementById('submit-project')
 const cancelProjectButton = document.getElementById('cancel-project')
 
 newProjectButton.addEventListener('click', () => {
-    createAddProjectModal()
-})
+	createAddProjectModal();
+});
 
+newNibbleButton.addEventListener('click', () => {
+    console.log('create add nibble')
+	createAddNibbleModal();
+});
+
+createChaosBox()
 getProjectsFromStorage();
 renderProjects()
 

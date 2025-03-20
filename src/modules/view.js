@@ -1,5 +1,5 @@
 import projects, { Project } from "./projects";
-import { createEditProjectModal } from "./modals";
+import { createEditProjectModal, createAddNibbleModal } from "./modals";
 import { getProjectsFromStorage, saveProjects } from "./database";
 
 // create variables for containers
@@ -15,7 +15,6 @@ function renderProjects() {
 
     // get projects from project list
     const projectList = projects.getProjects()
-    console.log({projectList})
 
     // for each project
     projectList.forEach((project, index) => {
@@ -43,21 +42,28 @@ function renderProjects() {
         projectEditBtn.addEventListener('click', () => {
             createEditProjectModal(project)
         })
+
+        // add task button
+        const addNibbleBtn = document.createElement('button');
+		addNibbleBtn.id = 'add-nibble-btn';
+		addNibbleBtn.textContent = 'Add Nibble';
+		addNibbleBtn.addEventListener('click', () => {
+			createAddNibbleModal(project);
+		});
         
         // delete button
         const projectDeleteBtn = document.createElement('button')
         projectDeleteBtn.id = 'project-delete-btn'
         projectDeleteBtn.textContent = 'Delete Project'
         projectDeleteBtn.addEventListener('click', () => {
-            projects.deleteProject(project) 
-            saveProjects()
-            renderProjects()
+            projectDeleteHandler(project)
         })
-            // append elements to project div
-            
+
+        // append elements to project div
         projectCard.appendChild(projectName)
         projectCard.appendChild(projectStatus);
         projectButtons.appendChild(projectEditBtn);
+        projectButtons.appendChild(addNibbleBtn);
         projectButtons.appendChild(projectDeleteBtn);
         projectCard.appendChild(projectButtons);
         
@@ -69,15 +75,14 @@ function renderProjects() {
 
 
 // delete project handler
-
-    // confirm if want to delete
-
-    // delete from project list
-
-    // rerender stuff
-
-    // store updated list
-
+function projectDeleteHandler(project) {
+    if (confirm(`Are you sure you want to delete ${project.name}?`)) {
+        projects.deleteProject(project);
+		saveProjects();
+		renderProjects();
+    }
+    
+}
 
 function renderNibbles() {
 
