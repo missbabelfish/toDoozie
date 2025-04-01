@@ -1,4 +1,4 @@
-import projects, { Project } from './projects';
+import projects from './projects';
 
 // create nibble
 class Nibble {
@@ -7,19 +7,19 @@ class Nibble {
 		this.notes = notes,
 		this.dueDate = dueDate,
 		this.priority = priority;
-    }
+  }
     // edit nibble
-    editNibble(newName, newNotes, newDueDate, newPriority) {
-      this.name = newName
-      this.notes = newNotes
-      this.dueDate = newDueDate
-      this.newPriority = newPriority
-    }
-    // delete nibble
-    deleteNibble(project, nibble) {
-        
-    }
+  editNibble(newName, newNotes, newDueDate, newPriority) {
+    this.name = newName
+    this.notes = newNotes
+    this.dueDate = newDueDate
+    this.priority = newPriority.toLowerCase();
+  }
+  // delete nibble
+  deleteNibble(projectIndex, nibbleIndex) {
+      projects.getProjects()[projectIndex].nibbles.splice(nibbleIndex, 1)
+  }
 }
 
 // export class, methods
-export default Nibble;
+export default Nibble ;

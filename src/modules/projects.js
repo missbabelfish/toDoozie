@@ -1,10 +1,10 @@
-import Nibble from './nibbles'
+// import nibble from './nibbles'
 
 // create project
 class Project {
-    constructor(name, status) {
+    constructor(name, status = 'working') {
         this.name = name,
-        this.status = 'working'
+        this.status = status,
         this.nibbles = []
     }
     editProject(newName) {

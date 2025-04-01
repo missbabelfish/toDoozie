@@ -1,4 +1,5 @@
 import projects, { Project } from "./projects";
+import Nibble from "./nibbles";
 
 function saveProjects() {
     const allProjects = projects.getProjects()
@@ -10,6 +11,9 @@ function getProjectsFromStorage() {
     allProjects.forEach(project => {
         projects.projects.push(project)
         Object.setPrototypeOf(project, Project.prototype);
+        project.nibbles.forEach(nibble => {
+            Object.setPrototypeOf(nibble, Nibble.prototype)
+        })
     })
 }
 

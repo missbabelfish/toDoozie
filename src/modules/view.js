@@ -52,7 +52,7 @@ function renderProjects() {
 		addNibbleBtn.id = 'add-nibble-btn';
 		addNibbleBtn.textContent = 'Add Nibble';
 		addNibbleBtn.addEventListener('click', () => {
-			createAddNibbleModal(project);
+			createAddNibbleModal(project, index);
 		});
         
         // delete button
@@ -110,6 +110,7 @@ function renderNibbles(project) {
 
 	// get all nibbles
 	const nibbles = project.nibbles;
+    console.log(nibbles)
 
 	const nibbleHeader = document.createElement('h2');
 	nibbleHeader.classList.add('headers');
@@ -131,10 +132,12 @@ function renderNibbles(project) {
 		const nibblePriority = document.createElement('p');
 		nibblePriority.textContent = nibble.priority;
 		const nibbleEditBtn = document.createElement('button');
+
 		nibbleEditBtn.textContent = 'Edit Nibble';
-		// nibbleEditBtn.addEventListener('click', () => {
-		// 	nibbleEditHandler(seedProject, nibble);
-		// });
+		nibbleEditBtn.addEventListener('click', () => {
+			nibbleEditHandler(project, nibble);
+		});
+
 		const nibbleDeleteBtn = document.createElement('button');
 		nibbleDeleteBtn.textContent = 'Delete Nibble';
 		// nibbleDeleteBtn.addEventListener('click', () => {
@@ -157,9 +160,9 @@ function renderNibbles(project) {
 	// (You can implement this logic here)
 }
 
-// function nibbleEditHandler(nibble) {
-//     createEditNibbleModal(nibble)
-// }
+function nibbleEditHandler(project, nibble) {
+    createEditNibbleModal(project, nibble)
+}
 
 // delete nibble handler
 // function nibbleDeleteHandler(project, nibble) {

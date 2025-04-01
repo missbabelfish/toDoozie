@@ -1,4 +1,5 @@
 import projects, { Project } from './projects'
+import  Nibble from './nibbles'
 import { renderProjects, renderNibbles } from './view'
 import { saveProjects } from './database'
 
@@ -50,6 +51,7 @@ function createAddProjectModal() {
 
 // create edit project modal
 function createEditProjectModal(project) {
+	console.log(project)
     const editProjectModal = document.createElement('dialog')
     const editProjectForm = document.createElement('form')
     const projectLabel = document.createElement('label');
@@ -91,10 +93,10 @@ function createEditProjectModal(project) {
 		// render nibbles
 		editProjectModal.close();
     })
-
+	console.log(editProjectModal)
 }
 
-function createAddNibbleModal(project) {
+function createAddNibbleModal(project, projectIndex) {
 	const addNibbleModal = document.createElement('dialog');
 	const addNibbleForm = document.createElement('form');
 
@@ -180,8 +182,13 @@ function createAddNibbleModal(project) {
 		const nibbleDate = formData.get('due-date'); 
 		const nibblePriority = formData.get('priority');
 
-		project.addNibble(nibbleName, nibbleNotes, nibbleDate, nibblePriority);
-		addNibbleModal.close();
+		projects.getProjects()[projectIndex].nibbles.push(new Nibble(
+			nibbleName,
+			nibbleNotes,
+			nibbleDate,
+			nibblePriority
+		));
+		addNibbleModal.remove();
 		saveProjects();
 		renderProjects();
         renderNibbles(project);
@@ -189,8 +196,113 @@ function createAddNibbleModal(project) {
 	});
 }
 
-function createEditNibbleModal(nibble) {
+function createEditNibbleModal(project, nibble) {
+	console.log({nibble})
+	const editNibbleModal = document.createElement('dialog');
+	const editNibbleForm = document.createElement('form');
 
+	// Nibble Name
+	const nibbleLabel = document.createElement('label');
+	nibbleLabel.htmlFor = 'nibble-name';
+	nibbleLabel.textContent = 'Nibble Name:';
+	const nibbleInput = document.createElement('input');
+	nibbleInput.setAttribute('id', 'nibble-name');
+	nibbleInput.setAttribute('name', 'nibble-name');
+	nibbleInput.setAttribute('required', 'true');
+	nibbleInput.value = `${nibble.name}`
+
+	// Notes
+	const notesLabel = document.createElement('label');
+	notesLabel.htmlFor = 'notes';
+	notesLabel.textContent = 'Notes';
+	const notesInput = document.createElement('textarea');
+	notesInput.setAttribute('id', 'notes');
+	notesInput.setAttribute('name', 'notes');
+	notesInput.value = `${nibble.notes}`
+
+	// Due Date
+	const dateLabel = document.createElement('label');
+	dateLabel.htmlFor = 'due-date';
+	dateLabel.textContent = 'Due Date:';
+	const dateInput = document.createElement('input');
+	dateInput.type = 'date';
+	dateInput.setAttribute('id', 'due-date');
+	dateInput.setAttribute('name', 'due-date');
+	dateInput.value = nibble.dueDate
+
+	// Priority
+	const priorityLabel = document.createElement('label');
+	priorityLabel.htmlFor = 'priority';
+	priorityLabel.textContent = 'Priority:';
+	const priorityInput = document.createElement('select');
+	priorityInput.setAttribute('id', 'priority');
+	priorityInput.setAttribute('name', 'priority');
+
+	// Priority options
+	const priorities = ['Low', 'Medium', 'High'];
+	priorities.forEach(priority => {
+		const option = document.createElement('option');
+		option.textContent = priority;
+		option.value = priority.toLowerCase();
+		if (nibble.priority.toLowerCase() === priority.toLowerCase()) {
+			option.selected = true;
+		}
+		priorityInput.appendChild(option);
+	});
+
+	// Buttons
+	const cancelEditNibbleBtn = document.createElement('button');
+	cancelEditNibbleBtn.textContent = 'Cancel';
+	cancelEditNibbleBtn.type = 'button';
+	cancelEditNibbleBtn.addEventListener('click', () => {
+		editNibbleModal.close();
+	});
+
+	const submitEditNibbleBtn = document.createElement('input');
+	submitEditNibbleBtn.type = 'submit';
+	submitEditNibbleBtn.value = 'Submit';
+
+	// Append elements to form
+	[
+		nibbleLabel,
+		nibbleInput,
+		notesLabel,
+		notesInput,
+		dateLabel,
+		dateInput,
+		priorityLabel,
+		priorityInput,
+		cancelEditNibbleBtn,
+		submitEditNibbleBtn,
+	].forEach(element => editNibbleForm.appendChild(element));
+
+	editNibbleModal.appendChild(editNibbleForm)
+
+	document.body.appendChild(editNibbleModal);
+	
+	editNibbleModal.showModal();
+
+	editNibbleForm.addEventListener('submit', e => {
+		e.preventDefault();
+		const formData = new FormData(e.target);
+
+		const newNibbleName = formData.get('nibble-name');
+		const newNibbleNotes = formData.get('notes');
+		const newNibbleDate = formData.get('due-date');
+		const newNibblePriority = formData.get('priority');
+		nibble.editNibble(
+			newNibbleName,
+			newNibbleNotes,
+			newNibbleDate,
+			newNibblePriority
+		);
+		saveProjects();
+		renderNibbles(project);
+		// set nibbles to render in reverse
+		// render nibbles
+		editNibbleModal.close();
+	});
+	console.log(editNibbleModal)
 }
 
 export { 
