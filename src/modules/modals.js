@@ -36,10 +36,8 @@ function createAddProjectModal() {
     addProjectForm.addEventListener('submit', (e) => {
         e.preventDefault()
         const formData = new FormData(e.target)
-        console.log(formData);
         const projectName = formData.get('new-project-name')
         projects.addProject(projectName, 'incomplete')
-        console.log(projects.getProjects())
         renderProjects()
         // set projects to render in reverse
         // render nibbles
@@ -87,7 +85,6 @@ function createEditProjectModal(project) {
         const formData = new FormData(e.target);
 		const newName = formData.get('project-name');
 		project.editProject(newName);
-		console.log(projects.getProjects());
         saveProjects()
 		renderProjects();
 		// set projects to render in reverse
@@ -98,7 +95,6 @@ function createEditProjectModal(project) {
 }
 
 function createAddNibbleModal(project) {
-	console.log(`creating add nibble for ${project.name}`);
 	const addNibbleModal = document.createElement('dialog');
 	const addNibbleForm = document.createElement('form');
 
@@ -184,15 +180,12 @@ function createAddNibbleModal(project) {
 		const nibbleDate = formData.get('due-date'); 
 		const nibblePriority = formData.get('priority');
 
-		console.log({ nibbleName, nibbleNotes, nibbleDate, nibblePriority });
-
 		project.addNibble(nibbleName, nibbleNotes, nibbleDate, nibblePriority);
 		addNibbleModal.close();
 		saveProjects();
 		renderProjects();
         renderNibbles(project);
 
-		console.log(projects.getProjects());
 	});
 }
 
