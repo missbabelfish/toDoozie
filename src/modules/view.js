@@ -13,17 +13,16 @@ const nibblesContainer = document.getElementById('nibbles-container');
 
 // render projects
 function renderProjects() {
-    console.log('renderProjects fired')
 
     // clear projects container
     projectsContainer.innerHTML = '';
 
     // get projects from project list
     const projectList = projects.getProjects()
+    console.log({projectList})
 
     // for each project
     projectList.forEach((project, index) => {
-        console.log(project)
     
         // create project div
         const projectCard = document.createElement('div')
@@ -73,9 +72,15 @@ function renderProjects() {
         projectCard.appendChild(projectButtons);
         
         projectsContainer.append(projectCard)
+
+        // event listener to check which project has focus and render its nibbles
+        projectCard.addEventListener('click', () => {
+            // remove active class from all other projects
+            displayActiveProject(projectCard, project)
+        })
+
     }) 
 
-    // event listener to check which project has focus and render its nibbles
 }
 
 
@@ -89,15 +94,22 @@ function projectDeleteHandler(project) {
     
 }
 
+function displayActiveProject(projectCard, project) {
+    projectsContainer.childNodes.forEach(child => {
+        if (child.classList.contains('active')) {
+            child.classList.remove('active')
+        }
+    })
+    projectCard.classList.add('active')
+    renderNibbles(project);
+}
+
 function renderNibbles(project) {
-    console.log(project)
-	console.log(`rendering nibbles for ${project.name}`)
 	// clear main container
 	nibblesContainer.innerHTML = '';
 
 	// get all nibbles
 	const nibbles = project.nibbles;
-    console.log(nibbles)
 
 	const nibbleHeader = document.createElement('h2');
 	nibbleHeader.classList.add('headers');
@@ -106,7 +118,6 @@ function renderNibbles(project) {
 
 	// for each nibble
 	nibbles.forEach(nibble => {
-		console.log(nibble);
 		// check if nibble active,
 
 		// create nibble container div
@@ -129,14 +140,6 @@ function renderNibbles(project) {
 		// nibbleDeleteBtn.addEventListener('click', () => {
         //     nibbleDeleteHandler(seedProject, nibble);
         // })
-        console.log({
-            nibbleName,
-            nibbleNotes,
-            nibbleDue,
-            nibblePriority,
-            nibbleEditBtn,
-            nibbleDeleteBtn
-        })
 
         // append elements
         nibbleCard.appendChild(nibbleName)

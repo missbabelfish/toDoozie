@@ -19,7 +19,7 @@ newProjectButton.addEventListener('click', () => {
 if (JSON.parse(localStorage.getItem('all-projects')) === null) {
     createChaosBox();
 }
-// getProjectsFromStorage();
+getProjectsFromStorage();
 renderProjects()
 renderNibbles(projects.getProjects()[0])
 

@@ -10,7 +10,10 @@ class Nibble {
     }
     // edit nibble
     editNibble(newName, newNotes, newDueDate, newPriority) {
-
+      this.name = newName
+      this.notes = newNotes
+      this.dueDate = newDueDate
+      this.newPriority = newPriority
     }
     // delete nibble
     deleteNibble(project, nibble) {

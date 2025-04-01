@@ -42,3 +42,8 @@ dialog {
 .project-card {
   margin: 1rem 0;
 }
+
+/* selected project highlight */
+.active {
+  background-color: rgb(199, 196, 196);
+}
