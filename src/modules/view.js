@@ -7,6 +7,8 @@ import
 } from "./modals";
 import Nibble from './nibbles';
 import { getProjectsFromStorage, saveProjects } from "./database";
+import { format, compareAsc, parseISO } from 'date-fns';
+
 
 // create variables for containers
 const projectsContainer = document.getElementById('projects-container');
@@ -132,7 +134,9 @@ function renderNibbles(project) {
 		const nibbleNotes = document.createElement('p');
 		nibbleNotes.textContent = nibble.notes;
 		const nibbleDue = document.createElement('p');
-		nibbleDue.textContent = nibble.dueDate;
+        const isoDue = parseISO(nibble.dueDate)
+        const formattedDate = nibble.dueDate ? format(isoDue, 'LLL do y') : ''
+		nibbleDue.textContent = formattedDate;
 		const nibblePriority = document.createElement('p');
 		nibblePriority.textContent = nibble.priority;
 		const nibbleEditBtn = document.createElement('button');
