@@ -29,6 +29,9 @@ function renderProjects() {
         // create project div
         const projectCard = document.createElement('div')
         projectCard.classList.add('project-card')
+        if (project.active) {
+            projectCard.classList.add('active')
+        }
     
         // project name
         const projectName = document.createElement('h3')
@@ -78,7 +81,7 @@ function renderProjects() {
         // event listener to check which project has focus and render its nibbles
         projectCard.addEventListener('click', () => {
             // remove active class from all other projects
-            displayActiveProject(projectCard, project)
+            updateActiveProject(projectCard, project)
         })
 
     }) 
@@ -96,13 +99,17 @@ function projectDeleteHandler(project) {
     
 }
 
-function displayActiveProject(projectCard, project) {
+function updateActiveProject(projectCard, project) {
     projectsContainer.childNodes.forEach(child => {
         if (child.classList.contains('active')) {
             child.classList.remove('active')
         }
     })
+    projects.getProjects().forEach(project => {
+        project.active = false
+    })
     projectCard.classList.add('active')
+    project.active = true
     renderNibbles(project);
 }
 

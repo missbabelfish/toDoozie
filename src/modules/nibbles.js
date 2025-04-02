@@ -17,11 +17,8 @@ class Nibble {
   }
   // delete nibble
   deleteNibble(project, nibbleIndex) {
-    console.log(`deleteNibble fired on project ${project}, at index ${nibbleIndex}`)
     const projectList = projects.getProjects();
-    console.log({projectList})
     const projectIndex = projectList.indexOf(project)
-    console.log(projectList[projectIndex].nibbles)
     projectList[projectIndex].nibbles.splice(nibbleIndex, 1)
   }
 }
