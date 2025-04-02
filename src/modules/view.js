@@ -20,7 +20,6 @@ function renderProjects() {
 
     // get projects from project list
     const projectList = projects.getProjects()
-    console.log({projectList})
 
     // for each project
     projectList.forEach((project, index) => {
@@ -106,13 +105,17 @@ function displayActiveProject(projectCard, project) {
 }
 
 function renderNibbles(project) {
-    console.log(`renderNibbles fired for project ${project.name}`)
-	// clear main container
+    console.log(project)
+    // clear main container
 	nibblesContainer.innerHTML = '';
+
+    if (project.nibbles.length === 0) {
+        nibblesContainer.textContent = 'no nibbles to nibble'
+        return
+    }
 
 	// get all nibbles
 	const nibbles = project.nibbles;
-    console.log(nibbles)
 
 	const nibbleHeader = document.createElement('h2');
 	nibbleHeader.classList.add('headers');
