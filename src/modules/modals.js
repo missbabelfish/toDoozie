@@ -1,5 +1,5 @@
 import projects, { Project } from './projects'
-import  Nibble from './nibbles'
+import Nibble from './nibbles'
 import { renderProjects, renderNibbles } from './view'
 import { saveProjects } from './database'
 

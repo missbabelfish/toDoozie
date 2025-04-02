@@ -16,8 +16,13 @@ class Nibble {
     this.priority = newPriority.toLowerCase();
   }
   // delete nibble
-  deleteNibble(projectIndex, nibbleIndex) {
-      projects.getProjects()[projectIndex].nibbles.splice(nibbleIndex, 1)
+  deleteNibble(project, nibbleIndex) {
+    console.log(`deleteNibble fired on project ${project}, at index ${nibbleIndex}`)
+    const projectList = projects.getProjects();
+    console.log({projectList})
+    const projectIndex = projectList.indexOf(project)
+    console.log(projectList[projectIndex].nibbles)
+    projectList[projectIndex].nibbles.splice(nibbleIndex, 1)
   }
 }
 

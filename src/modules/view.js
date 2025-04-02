@@ -5,6 +5,7 @@ import
     createAddNibbleModal,
     createEditNibbleModal
 } from "./modals";
+import Nibble from './nibbles';
 import { getProjectsFromStorage, saveProjects } from "./database";
 
 // create variables for containers
@@ -105,6 +106,7 @@ function displayActiveProject(projectCard, project) {
 }
 
 function renderNibbles(project) {
+    console.log(`renderNibbles fired for project ${project.name}`)
 	// clear main container
 	nibblesContainer.innerHTML = '';
 
@@ -118,7 +120,7 @@ function renderNibbles(project) {
 	nibblesContainer.appendChild(nibbleHeader);
 
 	// for each nibble
-	nibbles.forEach(nibble => {
+	nibbles.forEach((nibble, index) => {
 		// check if nibble active,
 
 		// create nibble container div
@@ -140,9 +142,9 @@ function renderNibbles(project) {
 
 		const nibbleDeleteBtn = document.createElement('button');
 		nibbleDeleteBtn.textContent = 'Delete Nibble';
-		// nibbleDeleteBtn.addEventListener('click', () => {
-        //     nibbleDeleteHandler(seedProject, nibble);
-        // })
+		nibbleDeleteBtn.addEventListener('click', () => {
+            nibbleDeleteHandler(project, nibble, index);
+        })
 
         // append elements
         nibbleCard.appendChild(nibbleName)
@@ -157,7 +159,6 @@ function renderNibbles(project) {
 	});
 
 	// check if all nibbles eaten, update project status
-	// (You can implement this logic here)
 }
 
 function nibbleEditHandler(project, nibble) {
@@ -165,11 +166,13 @@ function nibbleEditHandler(project, nibble) {
 }
 
 // delete nibble handler
-// function nibbleDeleteHandler(project, nibble) {
-//     if (confirm('Are you sure you want to delete this nibble?')) {
-//         nibble.deleteNibble(project, nibble)
-//     }
-// }
+function nibbleDeleteHandler(project, nibble, nibbleIndex) {
+    if (confirm('Are you sure you want to delete this nibble?')) {
+        nibble.deleteNibble(project, nibbleIndex)
+        renderNibbles(project)
+        saveProjects()
+    }
+}
 
 
 export { renderProjects, renderNibbles }
