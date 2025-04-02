@@ -129,6 +129,7 @@ function renderNibbles(project) {
 
 		// create nibble container div
 		const nibbleCard = document.createElement('div');
+        nibbleCard.classList.add('nibble-card')
 		const nibbleName = document.createElement('h3');
 		nibbleName.textContent = nibble.name;
 		const nibbleNotes = document.createElement('p');

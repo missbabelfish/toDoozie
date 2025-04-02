@@ -10,25 +10,30 @@ h1 {
 }
 
 .container {
+  gap: 2rem;
   border: 3px solid blue;
   height: 100vh;
 }
 
 .content {
   display: flex;
-  border: 3px solid orange;
+  gap: 2rem;
   padding: 1rem;
 }
 
 .sidebar {
-  border: 2px solid chartreuse;
   min-width: 40ch;
   display: flex;
   flex-direction: column;
 }
 
+#new-proj-btn {
+  padding: .5rem;
+  width: 15ch;
+  margin: 0 auto 1rem;
+}
+
 .main {
-  border: 3px solid red;
   width: 100%;
 }
 
@@ -39,11 +44,25 @@ dialog {
   align-items: center;
 }
 
+#projects-container button {
+  margin-right: .5rem;
+}
+
 .project-card {
-  margin: 1rem 0;
+  /* margin: 1rem 0; */
+  padding: .5rem;
+  border-bottom: 1px dotted lightgray;
 }
 
 /* selected project highlight */
 .active {
   background-color: rgb(199, 196, 196);
+}
+
+#nibbles-container button {
+  margin-right: .5rem;
+}
+
+.nibble-card {
+  margin-bottom: 1rem;
 }
