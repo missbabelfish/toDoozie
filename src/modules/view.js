@@ -105,7 +105,6 @@ function displayActiveProject(projectCard, project) {
 }
 
 function renderNibbles(project) {
-    console.log(project)
     // clear main container
 	nibblesContainer.innerHTML = '';
 
@@ -170,7 +169,7 @@ function nibbleEditHandler(project, nibble) {
 
 // delete nibble handler
 function nibbleDeleteHandler(project, nibble, nibbleIndex) {
-    if (confirm('Are you sure you want to delete this nibble?')) {
+    if (confirm(`Are you sure you want to delete ${nibble.name}?`)) {
         nibble.deleteNibble(project, nibbleIndex)
         renderNibbles(project)
         saveProjects()
